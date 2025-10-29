@@ -1,0 +1,23 @@
+Run fix fonts:
+
+Set-ExecutionPolicy Bypass -Scope Process -Force
+.\fix-fonts.ps1
+
+
+
+How to run prune users:
+
+Dry-run first (no deletion):
+
+Set-ExecutionPolicy RemoteSigned -Scope Process -Force
+.\prune-users.ps1 -TargetOU "OU=CrewA,DC=example,DC=com"
+# Inspect the CSV output carefully
+
+
+Verify the list manually (especially for accounts you recognize). 
+Use Get-ADUser -Identity <sAM> to inspect any suspicious entries.
+
+Perform deletion only after manual review:
+
+.\prune-users.ps1 -TargetOU "OU=CrewA,DC=example,DC=com" -PerformDeletion
+# Then type CONFIRM DELETE to proceed
